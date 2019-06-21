@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Background
+  - bars
+  - items
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 770382355
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: bars
+    uniqueID: 2404648373
+    locked: 0
+  - name: brown_bar
+    uniqueID: 4230997235
+    locked: 0
+  - name: items
+    uniqueID: 2866907199
+    locked: 0
+  - name: Player
+    uniqueID: 3846242201
+    locked: 0
+  - name: UI
+    uniqueID: 2363957107
+    locked: 0
