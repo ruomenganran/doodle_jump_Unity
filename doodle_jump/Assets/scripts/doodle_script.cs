@@ -18,12 +18,6 @@ public class doodle_script : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         player_revert_offset = transform.localScale.x;
-        //Vector3 position_temp = new Vector3(0,0,10.0f);
-        //borderLeft = Camera.current.ViewportToWorldPoint(position_temp).x;
-        //position_temp.x = 1;
-        //borderRight = Camera.current.ViewportToWorldPoint(position_temp).x;
-
-
     }
 
     // Update is called once per frame
@@ -34,7 +28,10 @@ public class doodle_script : MonoBehaviour
 
 
     }
-
+    /// <summary>
+    /// 小人下落碰到bar的边缘，跳起
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (rb2d.velocity.y < 0)
@@ -66,14 +63,19 @@ public class doodle_script : MonoBehaviour
         }
         
     }
-
+    /// <summary>
+    /// 跳跃
+    /// </summary>
+    /// <param name="x"></param>
     void ActJumpPlayer(float x)
     {
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpSpeed * x), ForceMode2D.Impulse);
 
     }
-
+    /// <summary>
+    /// 按键处理
+    /// </summary>
     void ActKeyProcess()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
@@ -88,10 +90,32 @@ public class doodle_script : MonoBehaviour
             transform.localScale = new Vector3(-player_revert_offset, transform.localScale.y, transform.localScale.z);
             transform.rotation.Set(0, 180, 0, 0);
         }
+        else//无键盘输入，检测触摸屏
+        {
+            if(Input.touchCount > 0)
+            {
+                if((Input.touches[0].phase!=TouchPhase.Ended)&&(Input.touches[0].phase != TouchPhase.Canceled))
+                {
+                    if (Camera.main.WorldToViewportPoint(Input.touches[0].position).x > 0.5f)
+                    {
+                        transform.localScale = new Vector3(player_revert_offset, transform.localScale.y, transform.localScale.z);
+                        //此处作用是让小人实现左右翻转
+                        transform.rotation.Set(0, 0, 0, 0);
+                    }
+                    else
+                    {
+                        transform.localScale = new Vector3(-player_revert_offset, transform.localScale.y, transform.localScale.z);
+                        transform.rotation.Set(0, 180, 0, 0);
+                    }
+                }
+            }
+        }
         Vector2 movement = new Vector2(moveHorizontal * moveSpeed, rb2d.velocity.y);
         rb2d.velocity = movement;
     }
-
+    /// <summary>
+    /// 小人到屏幕边缘处理
+    /// </summary>
     void ActBoderBind()
     {
         //检测屏幕边缘。世界坐标系、观察坐标系、ViewPort、屏幕坐标系的相互转换。
@@ -108,26 +132,5 @@ public class doodle_script : MonoBehaviour
             transform.position = new Vector3(Camera.main.ViewportToWorldPoint(new Vector3(0.001f, 0, 0)).x,
                 transform.position.y, transform.position.z);
         }
-
-
-
-        //屏幕边缘定义为屏幕border相邻5%个width的空间
-        //if(transform.position.x - borderLeft < 0.05)
-        //{
-        //    transform.position = new Vector3(borderRight, transform.position.y, transform.position.z);
-        //}
-        //if (borderRight - transform.position.x < 0.05)
-        //{
-        //    transform.position = new Vector3(borderLeft, transform.position.y, transform.position.z);
-        //}
-
-        //todo:borderRight竟然是0
-        //print("transform.position.x:" + transform.position.x);
-        //print("borderLeft:" + borderLeft);
-        //print("view:" + Camera.main.WorldToViewportPoint(transform.position));
-        //print("Camera.main.pixelWidth:" + Camera.main.scaledPixelWidth);
-
-        //Vector3 pos1 = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-        //print(pos1);
     }
 }

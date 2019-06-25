@@ -5,6 +5,8 @@ using UnityEngine;
 public class RecyclePool_script : MonoBehaviour
 {
     public bar_manage bars;
+    public GameObject gameover_sprite;
+    public GameObject replay_sprite;
     private Vector3 pos_offset;
     // Start is called before the first frame update
     void Start()
@@ -22,7 +24,8 @@ public class RecyclePool_script : MonoBehaviour
         if (collision.name == "doodleR")
         {
             //gameover
-
+            gameover_sprite.SetActive(true);
+            replay_sprite.SetActive(true);
         }
         else if (collision.name.Contains("p-"))
         {

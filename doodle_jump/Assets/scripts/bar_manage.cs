@@ -66,21 +66,6 @@ public class bar_manage : MonoSingleton<bar_manage>
     {
         
     }
-
-    /// <summary>
-    /// 回收底部bar，生成新的bar
-    /// </summary>
-    void UpdateTilePool()
-    {
-        //先destroy超出屏幕下方的bar，然后加入queue中，最后重新生成bar
-        int count = 0;
-        //GameObject temp = GetComponent<Transform>().child
-
-
-    }
-
-    
-
     /// <summary>
     /// 生成tile池子
     /// </summary>
@@ -94,7 +79,6 @@ public class bar_manage : MonoSingleton<bar_manage>
             tilePool.Enqueue(go);
         }
     }
-
     /// <summary>
     /// 随机生成砖块
     /// </summary>
